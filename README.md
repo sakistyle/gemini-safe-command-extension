@@ -1,15 +1,16 @@
-# Gemini Safe Command Extension
+# 🛡️ Gemini Safe Command Extension
 
 A custom MCP server for [Gemini CLI](https://github.com/google/gemini-cli) that provides a secure, whitelisted environment for executing shell commands. This extension is designed to be used with **Custom Slash Commands**, enabling you to define safe workflows for building, testing, and environment setup without granting unrestricted shell access.
 
-## Features
+## ✨ Features
 
-- **Whitelist-based Execution**: Only pre-approved commands can be executed.
-- **Argument Validation**: Supports detailed validation of command arguments and subcommands (e.g., allowing `npm install` but blocking other arbitrary `npm` usage if configured).
-- **Dangerous Pattern Blocking**: Automatically blocks potentially destructive commands like `rm -rf /` or `sudo`.
-- **Configurable**: Define your own allowed commands via a JSON config file.
+- 📋 **Whitelist-based Execution**: Only pre-approved commands can be executed.
+- 🔍 **Argument Validation**: Supports detailed validation of command arguments and subcommands.
+- 🚫 **Dangerous Pattern Blocking**: Automatically blocks potentially destructive commands like `rm -rf /` or `sudo`.
+- ⚙️ **Configurable**: Define your own allowed commands via a JSON config file.
+- 🌐 **Cross-platform**: Built with Node.js and TypeScript for modern environments.
 
-## Installation
+## 🚀 Installation
 
 ### Using Gemini CLI (Recommended)
 
@@ -19,7 +20,7 @@ You can install this extension directly from GitHub using the `gemini` command:
 gemini extensions install https://github.com/sakistyle/gemini-safe-command-extension
 ```
 
-## Configuration
+## ⚙️ Configuration
 
 By default, this extension comes with a pre-configured whitelist of common safe development commands (see `src/index.ts`).
 
@@ -54,12 +55,7 @@ Run `gemini config` (or edit `~/.gemini/settings.json`) and add the `SAFE_COMMAN
 }
 ```
 
-The extension searches for config files in the following order:
-1.  Environment Variable: `SAFE_COMMAND_CONFIG_PATH` (Recommended)
-2.  XDG Config: `~/.config/gemini/safe-command.json`
-3.  Fallback to built-in defaults.
-
-## Usage
+## 💡 Usage
 
 ### Integration with Custom Slash Commands
 
@@ -68,15 +64,45 @@ This extension exposes a tool named `run_safe_command`. You can use this tool wh
 **Example Scenario:**
 You want to create a `/setup-project` command that initializes a project environment safely.
 
-**Command:**
+**Command execution:**
 ```bash
 gemini -o text --allowed-tools read_file,list_directory,search_file_content,glob,write_file,replace,run_safe_command "Initialize the project environment using the /setup-project command definition"
 ```
 
-## Security
+## 🛠️ Development
 
-This extension is a safety mechanism, not a perfect sandbox. It relies on `child_process.spawn` with `shell: false` to prevent shell-based injection, combined with argument whitelisting.
+This project uses [pnpm](https://pnpm.io/) for package management.
 
-## License
+### ✅ Prerequisites
+- Node.js >= 24
+- pnpm >= 10
 
-MIT
+### 🔧 Setup
+```bash
+pnpm install
+```
+
+### 📦 Build
+```bash
+pnpm run build
+```
+
+### 🧪 Test
+```bash
+pnpm test
+```
+
+## 🔒 Security
+
+This extension is a safety mechanism, not a perfect sandbox. It relies on `child_process.spawn` with `shell: false` to prevent shell-based injection, combined with argument whitelisting. 
+
+- ⚠️ Always use the most restrictive whitelist possible.
+- 🚫 Avoid allowing commands that can execute arbitrary code (e.g., `bash`, `python`, `eval`).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
