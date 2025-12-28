@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "safe-command": {
+      "command": "node",
+      "args": [
+        "/Users/yuki/.gemini/extensions/safe-command/dist/index.js"
+      ]
+    }
+  }
+}
